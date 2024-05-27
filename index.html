@@ -9,11 +9,14 @@
       html {
         scroll-behavior: smooth;
       }
+
+      #mobile-nav {
+        display: none;
+      }
     </style>
   </head>
   <body>
     <div class="flex flex-col min-h-[100dvh] bg-[#333333] text-gray-300">
-      
       <!-- Header & Navigation -->
       <header
         class="sticky top-0 z-50 bg-[#0A2463] px-4 py-3 md:px-6 md:py-4 drop-shadow backdrop-blur"
@@ -60,6 +63,7 @@
           </nav>
           <button
             class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 w-10 md:hidden"
+            id="hamburger"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -79,6 +83,46 @@
             </svg>
             <span class="sr-only">Toggle navigation menu</span>
           </button>
+
+          <!-- Mobile Menu -->
+          <nav id="mobile-nav" class="md:hidden">
+            <a
+              class="block rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-[#0E3386] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6]"
+              href="#"
+            >
+              Home
+            </a>
+            <a
+              class="block rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-[#0E3386] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6]"
+              href="#about"
+            >
+              About
+            </a>
+            <a
+              class="block rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-[#0E3386] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6]"
+              href="#education"
+            >
+              Education
+            </a>
+            <a
+              class="block rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-[#0E3386] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6]"
+              href="#skills"
+            >
+              Skills
+            </a>
+            <a
+              class="block rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-[#0E3386] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6]"
+              href="#projects"
+            >
+              Projects
+            </a>
+            <a
+              class="block rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-[#0E3386] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6]"
+              href="#contact"
+            >
+              Contact
+            </a>
+          </nav>
         </div>
       </header>
 
@@ -501,6 +545,18 @@
       <footer class="bg-[#0A2463] py-4 text-center text-gray-300">
         <p>&copy; 2024 Sujan Maji. All rights reserved.</p>
       </footer>
+
+      <!-- Scripts -->
+      <script>
+        document.getElementById('hamburger').addEventListener('click', function () {
+          var mobileNav = document.getElementById('mobile-nav');
+          if (mobileNav.style.display === 'block') {
+            mobileNav.style.display = 'none';
+          } else {
+            mobileNav.style.display = 'block';
+          }
+        });
+      </script>
     </div>
   </body>
 </html>
