@@ -4,14 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sujan Maji Portfolio</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
       html {
         scroll-behavior: smooth;
-      }
-
-      #mobile-nav {
-        display: none;
       }
     </style>
   </head>
@@ -19,9 +22,11 @@
     <div class="flex flex-col min-h-[100dvh] bg-[#333333] text-gray-300">
       <!-- Header & Navigation -->
       <header
-        class="sticky top-0 z-50 bg-[#0A2463] px-4 py-3 md:px-6 md:py-4 drop-shadow backdrop-blur"
+        class="sticky top-0 z-30 bg-[#0A2463] px-4 py-3 drop-shadow backdrop-blur md:px-6 md:py-4"
       >
-        <div class="container mx-auto flex items-center justify-between">
+        <div
+          class="container mx-auto flex items-center justify-between text-white"
+        >
           <a class="text-2xl font-bold text-[#00FF00]" href="#"> Portfolio </a>
           <nav class="hidden space-x-4 md:flex">
             <a
@@ -62,69 +67,60 @@
             </a>
           </nav>
           <button
-            class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 w-10 md:hidden"
-            id="hamburger"
+            id="hamburger-btn"
+            class="ring-offset-background focus-visible:ring-ring border-input bg-background hover:bg-accent hover:text-accent-foreground inline-flex h-10 w-10 items-center justify-center whitespace-nowrap rounded-md border text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 md:hidden"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="h-6 w-6"
-            >
-              <line x1="4" x2="20" y1="12" y2="12"></line>
-              <line x1="4" x2="20" y1="6" y2="6"></line>
-              <line x1="4" x2="20" y1="18" y2="18"></line>
-            </svg>
+            <i class="fa-solid fa-bars" id="hamburger-icon"></i>
+            <i class="fa-solid fa-xmark text-xl hidden" id="close-icon"></i>
             <span class="sr-only">Toggle navigation menu</span>
           </button>
-
-          <!-- Mobile Menu -->
-          <nav id="mobile-nav" class="md:hidden">
-            <a
-              class="block rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-[#0E3386] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6]"
-              href="#"
-            >
-              Home
-            </a>
-            <a
-              class="block rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-[#0E3386] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6]"
-              href="#about"
-            >
-              About
-            </a>
-            <a
-              class="block rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-[#0E3386] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6]"
-              href="#education"
-            >
-              Education
-            </a>
-            <a
-              class="block rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-[#0E3386] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6]"
-              href="#skills"
-            >
-              Skills
-            </a>
-            <a
-              class="block rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-[#0E3386] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6]"
-              href="#projects"
-            >
-              Projects
-            </a>
-            <a
-              class="block rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-[#0E3386] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6]"
-              href="#contact"
-            >
-              Contact
-            </a>
-          </nav>
         </div>
       </header>
+
+      <!-- Mobile navigation -->
+      <div
+        id="mobile-nav"
+        class="fixed inset-0 z-20 pt-24 bg-[#0A2463] md:hidden hidden"
+      >
+        <nav class="flex flex-col items-center gap-3 text-white">
+          <a
+            class="rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-[#0E3386] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6]"
+            href="#"
+          >
+            Home
+          </a>
+          <a
+            class="rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-[#0E3386] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6]"
+            href="#about"
+          >
+            About
+          </a>
+          <a
+            class="rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-[#0E3386] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6]"
+            href="#education"
+          >
+            Education
+          </a>
+          <a
+            class="rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-[#0E3386] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6]"
+            href="#skills"
+          >
+            Skills
+          </a>
+          <a
+            class="rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-[#0E3386] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6]"
+            href="#projects"
+          >
+            Projects
+          </a>
+          <a
+            class="rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-[#0E3386] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6]"
+            href="#contact"
+          >
+            Contact
+          </a>
+        </nav>
+      </div>
 
       <!-- Hero Section -->
       <section
@@ -184,7 +180,7 @@
             </div>
             <div class="flex items-center justify-center">
               <img
-                src="images/Sujan_Maji_Photo.jpg"
+                src="images/profile-pic.jpg"
                 alt="About Me"
                 width="260"
                 height="260"
@@ -349,7 +345,8 @@
                 </p>
                 <a
                   class="inline-flex items-center rounded-md bg-[#00FF00] px-4 py-2 text-sm font-medium text-[#0A2463] transition-colors hover:bg-[#00CC00] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6]"
-                  href="#"
+                  href="https://dice-roller-seven.vercel.app"
+                  target="_blank"
                 >
                   View Project
                 </a>
@@ -370,7 +367,7 @@
                 />
                 <h3 class="mb-2 text-xl font-bold text-[#8B5CF6]">Project 3</h3>
                 <p class="mb-4 text-gray-300">
-                  A responsive and accessible Note Taking App
+                  A responsive and accessible Tote Taking App
                 </p>
                 <a
                   class="inline-flex items-center rounded-md bg-[#00FF00] px-4 py-2 text-sm font-medium text-[#0A2463] transition-colors hover:bg-[#00CC00] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6]"
@@ -545,18 +542,28 @@
       <footer class="bg-[#0A2463] py-4 text-center text-gray-300">
         <p>&copy; 2024 Sujan Maji. All rights reserved.</p>
       </footer>
-
-      <!-- Scripts -->
-      <script>
-        document.getElementById('hamburger').addEventListener('click', function () {
-          var mobileNav = document.getElementById('mobile-nav');
-          if (mobileNav.style.display === 'block') {
-            mobileNav.style.display = 'none';
-          } else {
-            mobileNav.style.display = 'block';
-          }
-        });
-      </script>
     </div>
+
+    <script>
+      const toggleButton = document.getElementById("hamburger-btn");
+      const mobileNav = document.getElementById("mobile-nav");
+
+      toggleButton.addEventListener("click", toggleNavBar);
+
+      document
+        .querySelectorAll("#mobile-nav nav a")
+        .forEach((link) => link.addEventListener("click", toggleNavBar));
+
+      function toggleNavBar() {
+        mobileNav.classList.toggle("hidden");
+        if (!mobileNav.classList.contains("hidden")) {
+          document.querySelector("#hamburger-icon").classList.add("hidden");
+          document.querySelector("#close-icon").classList.remove("hidden");
+        } else {
+          document.querySelector("#hamburger-icon").classList.remove("hidden");
+          document.querySelector("#close-icon").classList.add("hidden");
+        }
+      }
+    </script>
   </body>
 </html>
