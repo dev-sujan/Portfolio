@@ -354,7 +354,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const timelineData = {
     "techmahindra-se": {
       title: "Software Engineer",
-      company: "Tech Mahindra",
+      company: '<a href="https://www.techmahindra.com/" target="_blank" style="color: inherit; text-decoration: underline;">Tech Mahindra</a>',
       period: "June 2025 — Present",
       bullets: [
         "Led core performance enhancement initiatives for global Shopify storefronts (Escentric Molecules, Bluebella, Castore), resulting in <strong>Lighthouse score boosts of 35%+</strong>.",
@@ -367,7 +367,7 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     "techmahindra-ase": {
       title: "Associate Software Engineer",
-      company: "Tech Mahindra",
+      company: '<a href="https://www.techmahindra.com/" target="_blank" style="color: inherit; text-decoration: underline;">Tech Mahindra</a>',
       period: "March 2024 — June 2025",
       bullets: [
         "Configured custom Liquid theme logic, dynamic collection grids, and optimized interactive cart drawers to decrease mobile bounce rates and drive customer conversions.",
