@@ -1,569 +1,903 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sujan Maji Portfolio</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-      html {
-        scroll-behavior: smooth;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="flex flex-col min-h-[100dvh] bg-[#333333] text-gray-300">
-      <!-- Header & Navigation -->
-      <header
-        class="sticky top-0 z-30 bg-[#0A2463] px-4 py-3 drop-shadow backdrop-blur md:px-6 md:py-4"
-      >
-        <div
-          class="container mx-auto flex items-center justify-between text-white"
-        >
-          <a class="text-2xl font-bold text-[#00FF00]" href="#"> Portfolio </a>
-          <nav class="hidden space-x-4 md:flex">
-            <a
-              class="rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-[#0E3386] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6]"
-              href="#"
-            >
-              Home
-            </a>
-            <a
-              class="rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-[#0E3386] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6]"
-              href="#about"
-            >
-              About
-            </a>
-            <a
-              class="rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-[#0E3386] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6]"
-              href="#education"
-            >
-              Education
-            </a>
-            <a
-              class="rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-[#0E3386] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6]"
-              href="#skills"
-            >
-              Skills
-            </a>
-            <a
-              class="rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-[#0E3386] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6]"
-              href="#projects"
-            >
-              Projects
-            </a>
-            <a
-              class="rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-[#0E3386] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6]"
-              href="#contact"
-            >
-              Contact
-            </a>
-          </nav>
-          <button
-            id="hamburger-btn"
-            class="ring-offset-background focus-visible:ring-ring border-input bg-background hover:bg-accent hover:text-accent-foreground inline-flex h-10 w-10 items-center justify-center whitespace-nowrap rounded-md border text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 md:hidden"
-          >
-            <i class="fa-solid fa-bars" id="hamburger-icon"></i>
-            <i class="fa-solid fa-xmark text-xl hidden" id="close-icon"></i>
-            <span class="sr-only">Toggle navigation menu</span>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sujan Maji | Portfolio & E-Commerce Performance Engineer</title>
+  <meta name="description"
+    content="Portfolio of Sujan Maji, a Software Engineer specializing in custom Shopify theme development, page speed optimization, CI/CD automation, and AI integrations.">
+  <link rel="stylesheet" href="styles.css">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
+</head>
+
+<body class="theme-obsidian">
+
+  <!-- Interactive Particles Canvas -->
+  <canvas id="bg-particles"></canvas>
+
+  <!-- Header / Navigation -->
+  <header class="glass-header">
+    <div class="nav-container">
+      <a href="#" class="nav-logo">
+        <span class="logo-symbol">⚡</span>
+        <span class="logo-text">Sujan.dev</span>
+      </a>
+
+      <nav class="nav-menu" id="navMenu">
+        <a href="#about" class="nav-link">About</a>
+        <a href="#experience" class="nav-link">Experience</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#playground" class="nav-link">Playground</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </nav>
+
+      <!-- Theme Switcher -->
+      <div class="theme-controller">
+        <button class="theme-toggle-btn" id="themeBtn" aria-label="Switch Theme">
+          <i data-lucide="palette" class="icon-sm"></i>
+          <span id="themeLabel">Obsidian</span>
+        </button>
+        <div class="theme-dropdown" id="themeDropdown">
+          <button class="dropdown-item active" data-theme="obsidian">
+            <span class="theme-color-dot obsidian"></span> Obsidian
+          </button>
+          <button class="dropdown-item" data-theme="light">
+            <span class="theme-color-dot light"></span> Pure Light
+          </button>
+          <button class="dropdown-item" data-theme="emerald">
+            <span class="theme-color-dot emerald"></span> Shopify Emerald
           </button>
         </div>
-      </header>
-
-      <!-- Mobile navigation -->
-      <div
-        id="mobile-nav"
-        class="fixed inset-0 z-20 pt-24 bg-[#0A2463] md:hidden hidden"
-      >
-        <nav class="flex flex-col items-center gap-3 text-white">
-          <a
-            class="rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-[#0E3386] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6]"
-            href="#"
-          >
-            Home
-          </a>
-          <a
-            class="rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-[#0E3386] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6]"
-            href="#about"
-          >
-            About
-          </a>
-          <a
-            class="rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-[#0E3386] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6]"
-            href="#education"
-          >
-            Education
-          </a>
-          <a
-            class="rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-[#0E3386] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6]"
-            href="#skills"
-          >
-            Skills
-          </a>
-          <a
-            class="rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-[#0E3386] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6]"
-            href="#projects"
-          >
-            Projects
-          </a>
-          <a
-            class="rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-[#0E3386] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6]"
-            href="#contact"
-          >
-            Contact
-          </a>
-        </nav>
       </div>
 
-      <!-- Hero Section -->
-      <section
-        class="relative flex h-[50vh] items-center justify-center bg-[url('images/hero-bg.webp')] bg-cover bg-center bg-no-repeat"
-      >
-        <div class="absolute inset-0 bg-[#0A2463]/50"></div>
-        <div class="relative z-10 space-y-6 text-center">
-          <!-- <h1 class="text-4xl font-bold text-gray-100 sm:text-5xl md:text-6xl">
-            Hi there!
-          </h1> -->
-          <h1 class="text-4xl font-bold text-gray-100 sm:text-5xl md:text-6xl">
-            I am <span class="font-bold text-[#00FF00]">Sujan Maji</span>
-          </h1>
-          <h1 class="text-4xl font-bold text-gray-100 sm:text-5xl md:text-6xl">
-            Welcome to My Portfolio
-          </h1>
-          <p class="text-lg text-gray-300 sm:text-xl md:text-2xl">
-            Explore my work and get in touch.
+      <!-- Mobile Menu Toggle -->
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Menu">
+        <i data-lucide="menu"></i>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section id="about" class="hero-section">
+      <div class="hero-container">
+        <div class="hero-content reveal">
+          <span class="hero-badge">
+            <i data-lucide="zap" class="icon-xs text-primary"></i> E-Commerce & Performance Specialist
+          </span>
+          <h1 class="hero-title">Building High-Speed, Automated Storefronts</h1>
+          <p class="hero-description">
+            I am a Software Engineer at Tech Mahindra. I design, optimize, and build custom Shopify themes, robust CI/CD
+            pipelines, and AI-powered automation utilities that turn page speed into customer conversions.
           </p>
-          <div class="flex justify-center space-x-4">
-            <a
-              class="inline-flex items-center rounded-md bg-[#00FF00] px-6 py-3 text-sm font-medium text-[#0A2463] transition-colors hover:bg-[#00CC00] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6]"
-              href="#projects"
-            >
-              View Projects
+          <div class="hero-actions">
+            <a href="#projects" class="btn btn-primary">
+              Explore Projects <i data-lucide="arrow-right" class="icon-xs"></i>
             </a>
-            <a
-              class="inline-flex items-center rounded-md border border-[#8B5CF6] px-6 py-3 text-sm font-medium text-[#8B5CF6] transition-colors hover:bg-[#8B5CF6] hover:text-[#0A2463] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6]"
-              href="#contact"
-            >
-              Contact Me
+            <a href="https://drive.google.com/file/d/1ZlvQv-rHQnggNTu2WZk7rZrkRdtf2GxI/view" target="_blank"
+              class="btn btn-secondary">
+              <i data-lucide="file-text" class="icon-xs"></i> View Resume
+            </a>
+            <a href="#playground" class="btn btn-secondary">Try Simulators</a>
+          </div>
+        </div>
+
+        <!-- Hero Visuals -->
+        <div class="hero-visual reveal">
+          <div class="avatar-wrapper">
+            <!-- Orbit SVGs -->
+            <svg class="orbit-svg-container" viewBox="0 0 320 320">
+              <circle class="orbit-circle-track" cx="160" cy="160" r="130" />
+              <circle class="orbit-circle-track inner" cx="160" cy="160" r="95" />
+            </svg>
+
+            <!-- Orbit Nodes representing Core Skills -->
+            <div class="orbit-icon-node node-shopify" title="Shopify / Liquid">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="shopifyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#96F2D7" />
+                    <stop offset="100%" stop-color="#0CA678" />
+                  </linearGradient>
+                </defs>
+                <path
+                  d="M15.337 23.979l7.216-1.561s-2.604-17.613-2.625-17.73c-.018-.116-.114-.192-.211-.192s-1.929-.136-1.929-.136-1.275-1.274-1.439-1.411c-.045-.037-.075-.057-.121-.074l-.914 21.104h.023zM11.71 11.305s-.81-.424-1.774-.424c-1.447 0-1.504.906-1.504 1.141 0 1.232 3.24 1.715 3.24 4.629 0 2.295-1.44 3.76-3.406 3.76-2.354 0-3.54-1.465-3.54-1.465l.646-2.086s1.245 1.066 2.28 1.066c.675 0 .975-.545.975-.932 0-1.619-2.654-1.694-2.654-4.359-.034-2.237 1.571-4.416 4.827-4.416 1.257 0 1.875.361 1.875.361l-.945 2.715-.02.01zM11.17.83c.136 0 .271.038.405.135-.984.465-2.064 1.639-2.508 3.992-.656.213-1.293.405-1.889.578C7.697 3.75 8.951.84 11.17.84V.83zm1.235 2.949v.135c-.754.232-1.583.484-2.394.736.466-1.777 1.333-2.645 2.085-2.971.193.501.309 1.176.309 2.1zm.539-2.234c.694.074 1.141.867 1.429 1.755-.349.114-.735.231-1.158.366v-.252c0-.752-.096-1.371-.271-1.871v.002zm2.992 1.289c-.02 0-.06.021-.078.021s-.289.075-.714.21c-.423-1.233-1.176-2.37-2.508-2.37h-.115C12.135.209 11.669 0 11.265 0 8.159 0 6.675 3.877 6.21 5.846c-1.194.365-2.063.636-2.16.674-.675.213-.694.232-.772.87-.075.462-1.83 14.063-1.83 14.063L15.009 24l.927-21.166z"
+                  fill="url(#shopifyGrad)" />
+              </svg>
+            </div>
+            <div class="orbit-icon-node node-react" title="React / Frontend">
+              <svg viewBox="0 0 24 24" class="spin-slow" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="reactGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#67e8f9" />
+                    <stop offset="100%" stop-color="#0891b2" />
+                  </linearGradient>
+                </defs>
+                <path
+                  d="M14.23 12.004a2.236 2.236 0 0 1-2.235 2.236 2.236 2.236 0 0 1-2.236-2.236 2.236 2.236 0 0 1 2.235-2.236 2.236 2.236 0 0 1 2.236 2.236zm2.648-10.69c-1.346 0-3.107.96-4.888 2.622-1.78-1.653-3.542-2.602-4.887-2.602-.41 0-.783.093-1.106.278-1.375.793-1.683 3.264-.973 6.365C1.98 8.917 0 10.42 0 12.004c0 1.59 1.99 3.097 5.043 4.03-.704 3.113-.39 5.588.988 6.38.32.187.69.275 1.102.275 1.345 0 3.107-.96 4.888-2.624 1.78 1.654 3.542 2.603 4.887 2.603.41 0 .783-.09 1.106-.275 1.374-.792 1.683-3.263.973-6.365C22.02 15.096 24 13.59 24 12.004c0-1.59-1.99-3.097-5.043-4.032.704-3.11.39-5.587-.988-6.38-.318-.184-.688-.277-1.092-.278zm-.005 1.09v.006c.225 0 .406.044.558.127.666.382.955 1.835.73 3.704-.054.46-.142.945-.25 1.44-.96-.236-2.006-.417-3.107-.534-.66-.905-1.345-1.727-2.035-2.447 1.592-1.48 3.087-2.292 4.105-2.295zm-9.77.02c1.012 0 2.514.808 4.11 2.28-.686.72-1.37 1.537-2.02 2.442-1.107.117-2.154.298-3.113.538-.112-.49-.195-.964-.254-1.42-.23-1.868.054-3.32.714-3.707.19-.09.4-.127.563-.132zm4.882 3.05c.455.468.91.992 1.36 1.564-.44-.02-.89-.034-1.345-.034-.46 0-.915.01-1.36.034.44-.572.895-1.096 1.345-1.565zM12 8.1c.74 0 1.477.034 2.202.093.406.582.802 1.203 1.183 1.86.372.64.71 1.29 1.018 1.946-.308.655-.646 1.31-1.013 1.95-.38.66-.773 1.288-1.18 1.87-.728.063-1.466.098-2.21.098-.74 0-1.477-.035-2.202-.093-.406-.582-.802-1.204-1.183-1.86-.372-.64-.71-1.29-1.018-1.946.303-.657.646-1.313 1.013-1.954.38-.66.773-1.286 1.18-1.868.728-.064 1.466-.098 2.21-.098zm-3.635.254c-.24.377-.48.763-.704 1.16-.225.39-.435.782-.635 1.174-.265-.656-.49-1.31-.676-1.947.64-.15 1.315-.283 2.015-.386zm7.26 0c.695.103 1.365.23 2.006.387-.18.632-.405 1.282-.66 1.933-.2-.39-.41-.783-.64-1.174-.225-.392-.465-.774-.705-1.146zm3.063.675c.484.15.944.317 1.375.498 1.732.74 2.852 1.708 2.852 2.476-.005.768-1.125 1.74-2.857 2.475-.42.18-.88.342-1.355.493-.28-.958-.646-1.956-1.1-2.98.45-1.017.81-2.01 1.085-2.964zm-13.395.004c.278.96.645 1.957 1.1 2.98-.45 1.017-.812 2.01-1.086 2.964-.484-.15-.944-.318-1.37-.5-1.732-.737-2.852-1.706-2.852-2.474 0-.768 1.12-1.742 2.852-2.476.42-.18.88-.342 1.356-.494zm11.678 4.28c.265.657.49 1.312.676 1.948-.64.157-1.316.29-2.016.39.24-.375.48-.762.705-1.158.225-.39.435-.788.636-1.18zm-9.945.02c.2.392.41.783.64 1.175.23.39.465.772.705 1.143-.695-.102-1.365-.23-2.006-.386.18-.63.406-1.282.66-1.933zM17.92 16.32c.112.493.2.968.254 1.423.23 1.868-.054 3.32-.714 3.708-.147.09-.338.128-.563.128-1.012 0-2.514-.807-4.11-2.28.686-.72 1.37-1.536 2.02-2.44 1.107-.118 2.154-.3 3.113-.54zm-11.83.01c.96.234 2.006.415 3.107.532.66.905 1.345 1.727 2.035 2.446-1.595 1.483-3.092 2.295-4.11 2.295-.22-.005-.406-.05-.553-.132-.666-.38-.955-1.834-.73-3.703.054-.46.142-.944.25-1.438zm4.56.64c.44.02.89.034 1.345.034.46 0 .915-.01 1.36-.034-.44.572-.895 1.095-1.345 1.565-.455-.47-.91-.993-1.36-1.565z"
+                  fill="url(#reactGrad)" />
+              </svg>
+            </div>
+            <div class="orbit-icon-node node-aws" title="AWS Cloud">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="awsGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#FFB800" />
+                    <stop offset="100%" stop-color="#FF7A00" />
+                  </linearGradient>
+                </defs>
+                <path
+                  d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"
+                  fill="url(#awsGrad)" />
+                <path d="M6 21c4-1.5 8-1.5 12 0" stroke="#FF7A00" stroke-width="2" stroke-linecap="round" fill="none" />
+                <path d="M16.5 19.5L18.5 21l-2 1.5" stroke="#FF7A00" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" fill="none" />
+              </svg>
+            </div>
+            <div class="orbit-icon-node node-liquid" title="Liquid Templating">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="liquidGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#38bdf8" />
+                    <stop offset="100%" stop-color="#0284c7" />
+                  </linearGradient>
+                </defs>
+                <path d="M12 22a7 7 0 0 0 7-7c0-4.3-7-13-7-13S5 10.7 5 15a7 7 0 0 0 7 7z" fill="url(#liquidGrad)" />
+              </svg>
+            </div>
+
+            <!-- Avatar Picture Container -->
+            <div class="avatar-img-container">
+              <img src="assets/avatar.png" alt="Sujan Maji" class="avatar-img">
+            </div>
+
+            <!-- Floating Badge 1: Lighthouse -->
+            <div class="floating-badge badge-lighthouse glass-panel">
+              <div class="badge-dial">
+                <svg class="badge-dial-svg" viewBox="0 0 36 36">
+                  <circle class="dial-bg" cx="18" cy="18" r="16" />
+                  <circle class="dial-fill" id="heroLighthouseDial" cx="18" cy="18" r="16" stroke-dasharray="100 100"
+                    stroke-dashoffset="100" />
+                </svg>
+                <span class="dial-val" id="heroLighthouseVal">0</span>
+              </div>
+              <div class="badge-text">
+                <h4>Performance</h4>
+                <p>Lighthouse Score</p>
+              </div>
+            </div>
+
+            <!-- Floating Badge 2: Shopify Certified -->
+            <div class="floating-badge badge-shopify glass-panel">
+              <div class="shopify-badge-icon-wrapper">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <linearGradient id="shopifyBadgeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#96F2D7" />
+                      <stop offset="100%" stop-color="#0CA678" />
+                    </linearGradient>
+                  </defs>
+                  <path
+                    d="M15.337 23.979l7.216-1.561s-2.604-17.613-2.625-17.73c-.018-.116-.114-.192-.211-.192s-1.929-.136-1.929-.136-1.275-1.274-1.439-1.411c-.045-.037-.075-.057-.121-.074l-.914 21.104h.023zM11.71 11.305s-.81-.424-1.774-.424c-1.447 0-1.504.906-1.504 1.141 0 1.232 3.24 1.715 3.24 4.629 0 2.295-1.44 3.76-3.406 3.76-2.354 0-3.54-1.465-3.54-1.465l.646-2.086s1.245 1.066 2.28 1.066c.675 0 .975-.545.975-.932 0-1.619-2.654-1.694-2.654-4.359-.034-2.237 1.571-4.416 4.827-4.416 1.257 0 1.875.361 1.875.361l-.945 2.715-.02.01zM11.17.83c.136 0 .271.038.405.135-.984.465-2.064 1.639-2.508 3.992-.656.213-1.293.405-1.889.578C7.697 3.75 8.951.84 11.17.84V.83zm1.235 2.949v.135c-.754.232-1.583.484-2.394.736.466-1.777 1.333-2.645 2.085-2.971.193.501.309 1.176.309 2.1zm.539-2.234c.694.074 1.141.867 1.429 1.755-.349.114-.735.231-1.158.366v-.252c0-.752-.096-1.371-.271-1.871v.002zm2.992 1.289c-.02 0-.06.021-.078.021s-.289.075-.714.21c-.423-1.233-1.176-2.37-2.508-2.37h-.115C12.135.209 11.669 0 11.265 0 8.159 0 6.675 3.877 6.21 5.846c-1.194.365-2.063.636-2.16.674-.675.213-.694.232-.772.87-.075.462-1.83 14.063-1.83 14.063L15.009 24l.927-21.166z"
+                    fill="url(#shopifyBadgeGrad)" />
+                </svg>
+              </div>
+              <div class="badge-text">
+                <h4>Shopify Developer</h4>
+                <p>Liquid Expert</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Impact / Statistics Bar -->
+    <section class="impact-section reveal">
+      <div class="impact-grid">
+        <div class="impact-card glass-panel">
+          <div class="impact-number gradient-text">+35%</div>
+          <div class="impact-label">Lighthouse Score Increase</div>
+        </div>
+        <div class="impact-card glass-panel">
+          <div class="impact-number gradient-text">15+</div>
+          <div class="impact-label">Storefront Enhancements</div>
+        </div>
+        <div class="impact-card glass-panel">
+          <div class="impact-number gradient-text">-80%</div>
+          <div class="impact-label">Manual DevOps Deployment Effort</div>
+        </div>
+        <div class="impact-card glass-panel">
+          <div class="impact-number gradient-text">1 Year</div>
+          <div class="impact-label">Promotion to Software Engineer</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills-section reveal">
+      <div class="section-header">
+        <h2 class="section-title">Core Competencies</h2>
+        <p class="section-subtitle">Technological assets and tools I use to deliver high-quality web applications.</p>
+      </div>
+
+      <!-- Skill Filter Buttons -->
+      <div class="skill-filters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="languages">Languages</button>
+        <button class="filter-btn" data-filter="frontend">Frontend</button>
+        <button class="filter-btn" data-filter="backend">Backend & DB</button>
+        <button class="filter-btn" data-filter="shopify">E-Commerce</button>
+        <button class="filter-btn" data-filter="devops">DevOps & Tools</button>
+      </div>
+
+      <!-- Skill Cards Grid -->
+      <div class="skills-grid" id="skillsGrid">
+        <!-- Languages -->
+        <div class="skill-tag languages" data-category="languages"><i data-lucide="code"
+            class="skill-icon icon-js"></i>JavaScript</div>
+        <div class="skill-tag languages" data-category="languages"><i data-lucide="layout"
+            class="skill-icon icon-html"></i>HTML5 & CSS3</div>
+        <div class="skill-tag languages" data-category="languages"><i data-lucide="coffee"
+            class="skill-icon icon-java"></i>Java</div>
+        <div class="skill-tag languages" data-category="languages"><i data-lucide="server"
+            class="skill-icon icon-php"></i>PHP</div>
+        <div class="skill-tag languages" data-category="languages"><i data-lucide="database"
+            class="skill-icon icon-sql"></i>SQL</div>
+
+        <!-- Frontend -->
+        <div class="skill-tag frontend" data-category="frontend"><i data-lucide="atom"
+            class="skill-icon icon-react"></i>React</div>
+        <div class="skill-tag frontend" data-category="frontend"><i data-lucide="wind"
+            class="skill-icon icon-tailwind"></i>Tailwind CSS</div>
+        <div class="skill-tag frontend" data-category="frontend"><i data-lucide="mouse-pointer"
+            class="skill-icon icon-dom"></i>DOM Manipulation</div>
+        <div class="skill-tag frontend" data-category="frontend"><i data-lucide="monitor-smartphone"
+            class="skill-icon icon-responsive"></i>Responsive CSS</div>
+
+        <!-- Backend -->
+        <div class="skill-tag backend" data-category="backend"><i data-lucide="terminal"
+            class="skill-icon icon-node"></i>NodeJS</div>
+        <div class="skill-tag backend" data-category="backend"><i data-lucide="route"
+            class="skill-icon icon-express"></i>ExpressJS</div>
+        <div class="skill-tag backend" data-category="backend"><i data-lucide="leaf"
+            class="skill-icon icon-spring"></i>Spring Boot</div>
+        <div class="skill-tag backend" data-category="backend"><i data-lucide="package"
+            class="skill-icon icon-laravel"></i>Laravel</div>
+
+        <!-- E-Commerce -->
+        <div class="skill-tag shopify" data-category="shopify"><i data-lucide="shopping-bag"
+            class="skill-icon icon-shopify"></i>Shopify liquid</div>
+        <div class="skill-tag shopify" data-category="shopify"><i data-lucide="palette"
+            class="skill-icon icon-theme"></i>Custom Theme Design</div>
+        <div class="skill-tag shopify" data-category="shopify"><i data-lucide="link-2"
+            class="skill-icon icon-api"></i>Shopify API integrations</div>
+
+        <!-- DevOps -->
+        <div class="skill-tag devops" data-category="devops"><i data-lucide="git-branch"
+            class="skill-icon icon-git"></i>Git & GitHub Actions</div>
+        <div class="skill-tag devops" data-category="devops"><i data-lucide="box"
+            class="skill-icon icon-docker"></i>Docker</div>
+        <div class="skill-tag devops" data-category="devops"><i data-lucide="cloud" class="skill-icon icon-aws"></i>AWS
+          Services</div>
+        <div class="skill-tag devops" data-category="devops"><i data-lucide="sparkles" class="skill-icon icon-ai"></i>AI
+          Tools (GitHub Copilot)</div>
+      </div>
+    </section>
+
+    <!-- Experience & Education Section -->
+    <section id="experience" class="timeline-section">
+      <div class="timeline-container">
+
+        <!-- Work Experience Column -->
+        <div class="timeline-column reveal">
+          <h3 class="column-title"><i data-lucide="briefcase" class="text-primary"></i> Professional Journey</h3>
+
+          <div class="timeline-list">
+            <div class="timeline-item glass-panel" data-timeline-id="techmahindra-se">
+              <div class="time-badge">June 2025 — Present</div>
+              <h4 class="item-title">Software Engineer</h4>
+              <h5 class="item-company">Tech Mahindra</h5>
+              <p class="item-desc">
+                Lead site performance engineering (+35% Lighthouse scores) and CI/CD automation. Coordinate team
+                training for AI tools and mentor junior developers. <strong
+                  style="color:var(--color-primary); font-size: 0.75rem; display:block; margin-top:0.4rem;">💡 Click for
+                  details</strong>
+              </p>
+            </div>
+
+            <div class="timeline-item glass-panel" data-timeline-id="techmahindra-ase">
+              <div class="time-badge">March 2024 — June 2025</div>
+              <h4 class="item-title">Associate Software Engineer</h4>
+              <h5 class="item-company">Tech Mahindra</h5>
+              <p class="item-desc">
+                Built responsive Shopify storefront layouts and custom Liquid sections. Developed Java automation suites
+                reducing manual testing cycles by 50%. Recipient of 4 Bravo awards. <strong
+                  style="color:var(--color-primary); font-size: 0.75rem; display:block; margin-top:0.4rem;">💡 Click for
+                  details</strong>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Education Column -->
+        <div class="timeline-column reveal">
+          <h3 class="column-title"><i data-lucide="graduation-cap" class="text-primary"></i> Education & Certifications
+          </h3>
+
+          <div class="timeline-list">
+            <div class="timeline-item glass-panel" data-timeline-id="education">
+              <div class="time-badge">2019 — 2023</div>
+              <h4 class="item-title">B.Tech in Computer Science</h4>
+              <h5 class="item-company">Regent Education & Research Foundation</h5>
+              <p class="item-desc">Focused on Software Engineering, Databases, and Web Development. Graduated with an
+                overall score of 85%. <strong
+                  style="color:var(--color-primary); font-size: 0.75rem; display:block; margin-top:0.4rem;">💡 Click for
+                  details</strong></p>
+            </div>
+
+            <div class="timeline-item glass-panel" data-timeline-id="certs">
+              <div class="time-badge">Certifications</div>
+              <h4 class="item-title">AWS & AI Systems</h4>
+              <h5 class="item-company">Amazon Web Services & Internal Badges</h5>
+              <p class="item-desc">Certified AWS Practitioner, and recipient of AI White Belt and AI Blue Belt
+                credentials. <strong
+                  style="color:var(--color-primary); font-size: 0.75rem; display:block; margin-top:0.4rem;">💡 Click for
+                  details</strong></p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects-section">
+      <div class="section-header reveal">
+        <h2 class="section-title">Case Studies & Brand Deliveries</h2>
+        <p class="section-subtitle">Official storefronts delivered for global Shopify merchants, emphasizing speed,
+          design fidelity, and DevOps automation.</p>
+      </div>
+
+      <!-- Subsection 1: Commercial Storefronts -->
+      <h3 class="subsection-title-divider reveal"><i data-lucide="shopping-bag" class="text-primary"></i> Commercial
+        Shopify Storefronts</h3>
+      <div class="brands-grid">
+        <!-- Escentric Molecules -->
+        <div class="brand-card glass-panel reveal">
+          <div class="brand-img-wrapper">
+            <img src="assets/escentric.png" alt="Escentric Molecules Storefront" class="brand-img">
+          </div>
+          <div class="brand-content">
+            <div class="brand-meta-row">
+              <span class="brand-role">Performance Tuning</span>
+              <span class="brand-tech">Liquid / JS</span>
+            </div>
+            <h4 class="brand-title">Escentric Molecules</h4>
+            <p class="brand-text">
+              Optimized script loading strategies, deferred heavy marketing tags, and restructured image source-sets on
+              this high-end fragrance store, improving Lighthouse scores by up to 35%.
+            </p>
+            <a href="https://escentric.com" target="_blank" class="brand-link">
+              Visit Live Store <i data-lucide="external-link" class="icon-xs"></i>
             </a>
           </div>
         </div>
-      </section>
 
-      <!-- About Me -->
-      <section id="about" class="py-16 md:pt-20 pb-5">
-        <div class="container mx-auto px-4 md:px-6">
-          <div class="grid gap-8 md:grid-cols-2">
-            <div>
-              <h2 class="mb-4 text-3xl font-bold text-[#00FF00] md:text-4xl">
-                <a href="#about">About Me</a>
-              </h2>
-              <p class="mb-6 text-gray-300">
-                Hi, I'm a passionate web developer with a strong background in
-                front-end technologies. I love creating beautiful and
-                user-friendly websites and applications that solve real-world
-                problems.
-              </p>
-              <p class="text-gray-300">
-                In my free time, I enjoy exploring new technologies,
-                contributing to open-source projects, and staying up-to-date
-                with the latest industry trends. I'm always eager to learn and
-                grow as a developer.
-              </p>
+        <!-- Bluebella -->
+        <div class="brand-card glass-panel reveal">
+          <div class="brand-img-wrapper">
+            <img src="assets/bluebella.png" alt="Bluebella Lingerie Storefront" class="brand-img">
+          </div>
+          <div class="brand-content">
+            <div class="brand-meta-row">
+              <span class="brand-role">Theme Development</span>
+              <span class="brand-tech">CSS Grid / Liquid</span>
             </div>
-            <div class="flex items-center justify-center">
-              <img
-                src="images/sujan-photo.jpg"
-                alt="About Me"
-                width="260"
-                height="260"
-                class="rounded-lg"
-                style="aspect-ratio: 400 / 450; object-fit: fill"
-              />
-            </div>
+            <h4 class="brand-title">Bluebella</h4>
+            <p class="brand-text">
+              Developed premium custom theme sections, responsive collection layout grids, and interactive cart drawer
+              states to improve buyer flows and mobile shopping UX.
+            </p>
+            <a href="https://www.bluebella.com" target="_blank" class="brand-link">
+              Visit Live Store <i data-lucide="external-link" class="icon-xs"></i>
+            </a>
           </div>
         </div>
-      </section>
 
-      <!-- Education -->
-      <section id="education" class="py-16 md:pt-20 pb-5 bg-[#222222]">
-        <div class="container mx-auto px-4 md:px-6">
-          <h2 class="mb-8 text-3xl font-bold text-[#00FF00] md:text-4xl">
-            <a href="#education">Education</a>
-          </h2>
-          <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            <div
-              class="rounded-lg border bg-card text-card-foreground shadow-sm"
-              data-v0-t="card"
-            >
-              <div class="p-6">
-                <h3 class="mb-2 text-xl font-bold text-[#8B5CF6]">
-                  Bachelor's Degree in Computer Science
-                </h3>
-                <p class="mb-4 text-gray-300">
-                  B.Tech in CSE from RERF, 2019 - 2023
-                </p>
-                <p class="text-gray-300">
-                  Graduated with a 9.29 GPA, specializing in Computer Science &
-                  Engineering.
-                </p>
-              </div>
+        <!-- Castore -->
+        <div class="brand-card glass-panel reveal">
+          <div class="brand-img-wrapper">
+            <img src="assets/castore.png" alt="Castore Sportswear Storefront" class="brand-img">
+          </div>
+          <div class="brand-content">
+            <div class="brand-meta-row">
+              <span class="brand-role">DevOps & CI/CD</span>
+              <span class="brand-tech">GitHub Actions / Docker</span>
             </div>
-            <div
-              class="rounded-lg border bg-card text-card-foreground shadow-sm"
-              data-v0-t="card"
-            >
-              <div class="p-6">
-                <h3 class="mb-2 text-xl font-bold text-[#8B5CF6]">
-                  Online Coursework in Full-Stack Development
-                </h3>
-                <p class="mb-4 text-gray-300">Udemy, 2021 - 2022</p>
-                <p class="text-gray-300">
-                  Completed a comprehensive course on building full-stack web
-                  applications using React, Node.js, and MongoDB.
-                </p>
-              </div>
-            </div>
-            <div
-              class="rounded-lg border bg-card text-card-foreground shadow-sm"
-              data-v0-t="card"
-            >
-              <div class="p-6">
-                <h3 class="mb-2 text-xl font-bold text-[#8B5CF6]">
-                  Certification in Web Design
-                </h3>
-                <p class="mb-4 text-gray-300">Coursera, 2020</p>
-                <p class="text-gray-300">
-                  Earned a certification in responsive web design, focusing on
-                  modern design principles and best practices.
-                </p>
-              </div>
-            </div>
+            <h4 class="brand-title">Castore</h4>
+            <p class="brand-text">
+              Engineered automated theme verification pipelines using GitHub Actions, reducing manual deployment efforts
+              by 80% and introducing automated theme linting audits.
+            </p>
+            <a href="https://castore.com" target="_blank" class="brand-link">
+              Visit Live Store <i data-lucide="external-link" class="icon-xs"></i>
+            </a>
           </div>
         </div>
-      </section>
 
-      <!-- Skills -->
-      <section id="skills" class="py-16 md:pt-20 pb-5">
-        <div class="container mx-auto px-4 md:px-6">
-          <h2 class="mb-8 text-3xl font-bold text-[#00FF00] md:text-4xl">
-            <a href="#skills">Skills</a>
-          </h2>
-          <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            <div>
-              <h3 class="mb-4 text-xl font-bold text-[#8B5CF6]">
-                Front-End Development
-              </h3>
-              <ul class="space-y-2 text-gray-300">
-                <li>HTML5, CSS3, JavaScript</li>
-                <li>React.js, Angular</li>
-                <li>Responsive Design</li>
-                <li>Accessibility</li>
-              </ul>
+        <!-- Hynes Eagle -->
+        <div class="brand-card glass-panel reveal">
+          <div class="brand-img-wrapper">
+            <img src="assets/hynes_eagle.png" alt="Hynes Eagle Storefront" class="brand-img">
+          </div>
+          <div class="brand-content">
+            <div class="brand-meta-row">
+              <span class="brand-role">Theme Development</span>
+              <span class="brand-tech">Liquid / CSS3</span>
             </div>
-            <div>
-              <h3 class="mb-4 text-xl font-bold text-[#8B5CF6]">
-                Back-End Development
-              </h3>
-              <ul class="space-y-2 text-gray-300">
-                <li>Node.js, Express.js</li>
-                <li>Prisma ORM</li>
-                <li>RESTful API Design & Development</li>
-                <li>Database Management (SQL, NoSQL)</li>
-              </ul>
-            </div>
-            <div>
-              <h3 class="mb-4 text-xl font-bold text-[#8B5CF6]">
-                Other Skills
-              </h3>
-              <ul class="space-y-2 text-gray-300">
-                <li>Git and Version Control</li>
-                <li>Agile Methodologies</li>
-                <li>Problem-Solving and Analytical Thinking</li>
-              </ul>
-            </div>
+            <h4 class="brand-title">Hynes Eagle</h4>
+            <p class="brand-text">
+              Built custom theme sections for travel gear layouts and optimized the responsive menu navigation for clean
+              rendering on standard mobile viewports.
+            </p>
+            <a href="https://hyneseagle.com" target="_blank" class="brand-link">
+              Visit Live Store <i data-lucide="external-link" class="icon-xs"></i>
+            </a>
           </div>
         </div>
-      </section>
 
-      <!-- Projects -->
-      <section id="projects" class="py-16 md:pt-20 pb-5 bg-[#222222]">
-        <div class="container mx-auto px-4 md:px-6">
-          <h2 class="mb-8 text-3xl font-bold text-[#00FF00] md:text-4xl">
-            <a href="#projects">My Projects</a>
-          </h2>
-          <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3 text-center">
-            <div
-              class="rounded-lg border bg-card text-card-foreground shadow-sm"
-              data-v0-t="card"
-            >
-              <div class="p-6 flex flex-col items-center justify-center">
-                <img
-                  src="images/e-commerce.jpg"
-                  alt="Project 1"
-                  width="300"
-                  height="200"
-                  class="mb-4 rounded-lg"
-                  style="aspect-ratio: 300 / 200; object-fit: cover"
-                />
-                <h3 class="mb-2 text-xl font-bold text-[#8B5CF6]">Project 1</h3>
-                <p class="mb-4 text-gray-300">
-                  A modern e-commerce website with a sleek and responsive
-                  design.
-                </p>
-                <a
-                  class="inline-flex items-center rounded-md bg-[#00FF00] px-4 py-2 text-sm font-medium text-[#0A2463] transition-colors hover:bg-[#00CC00] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6]"
-                  href="#"
-                >
-                  View Project
-                </a>
-              </div>
+        <!-- Iron Heart -->
+        <div class="brand-card glass-panel reveal">
+          <div class="brand-img-wrapper">
+            <img src="assets/iron_heart.png" alt="Iron Heart Storefront" class="brand-img">
+          </div>
+          <div class="brand-content">
+            <div class="brand-meta-row">
+              <span class="brand-role">Performance Tuning</span>
+              <span class="brand-tech">Script Deferrals / JS</span>
             </div>
-            <div
-              class="rounded-lg border bg-card text-card-foreground shadow-sm"
-              data-v0-t="card"
-            >
-              <div class="p-6 flex flex-col items-center justify-center">
-                <img
-                  src="images/dice.png"
-                  alt="Project 2"
-                  width="300"
-                  height="200"
-                  class="mb-4 rounded-lg"
-                  style="aspect-ratio: 300 / 200; object-fit: cover"
-                />
-                <h3 class="mb-2 text-xl font-bold text-[#8B5CF6]">Project 2</h3>
-                <p class="mb-4 text-gray-300">
-                  Rolling Master: A Dice Rolling Game.
-                </p>
-                <a
-                  class="inline-flex items-center rounded-md bg-[#00FF00] px-4 py-2 text-sm font-medium text-[#0A2463] transition-colors hover:bg-[#00CC00] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6]"
-                  href="https://dice-roller-seven.vercel.app"
-                  target="_blank"
-                >
-                  View Project
-                </a>
-              </div>
-            </div>
-            <div
-              class="rounded-lg border bg-card text-card-foreground shadow-sm"
-              data-v0-t="card"
-            >
-              <div class="p-6 flex flex-col items-center justify-center">
-                <img
-                  src="images/note-app.png"
-                  alt="Project 3"
-                  width="300"
-                  height="200"
-                  class="mb-4 rounded-lg"
-                  style="aspect-ratio: 300 / 200; object-fit: cover"
-                />
-                <h3 class="mb-2 text-xl font-bold text-[#8B5CF6]">Project 3</h3>
-                <p class="mb-4 text-gray-300">
-                  A responsive and accessible Tote Taking App
-                </p>
-                <a
-                  class="inline-flex items-center rounded-md bg-[#00FF00] px-4 py-2 text-sm font-medium text-[#0A2463] transition-colors hover:bg-[#00CC00] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6]"
-                  href="#"
-                >
-                  View Project
-                </a>
-              </div>
-            </div>
+            <h4 class="brand-title">Iron Heart</h4>
+            <p class="brand-text">
+              Conducted theme code refactoring to defer unused apps and optimize asset delivery, boosting general
+              pagespeed metrics and reducing render blocking.
+            </p>
+            <a href="https://www.ironheart.co.uk" target="_blank" class="brand-link">
+              Visit Live Store <i data-lucide="external-link" class="icon-xs"></i>
+            </a>
           </div>
         </div>
-      </section>
 
-      <!-- Contact -->
-      <section id="contact" class="py-16 md:pt-20 pb-5">
-        <div class="container mx-auto px-4 md:px-6">
-          <h2 class="mb-8 text-3xl font-bold text-[#00FF00] md:text-4xl">
-            <a href="#contact">Get in Touch</a>
-          </h2>
-          <div class="grid gap-8 md:grid-cols-2">
-            <div>
-              <p class="mb-6 text-gray-300">
-                I'm always excited to connect with new people and discuss
-                potential collaborations or projects. Feel free to reach out
-                using the form below, and I'll get back to you as soon as
-                possible.
-              </p>
-              <div class="space-y-4">
-                <div class="flex items-center space-x-4">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="h-6 w-6 text-[#8B5CF6]"
-                  >
-                    <rect width="20" height="16" x="2" y="4" rx="2"></rect>
-                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
-                  </svg>
-                  <a
-                    href="mailto:dev.sujanmaji@gmail.com?subject=Call me&body=Hi, "
-                    class="text-gray-300 hover:text-[#8B5CF6]"
-                  >
-                    dev.sujanmaji@gmail.com
-                  </a>
-                </div>
-                <div class="flex items-center space-x-4">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="h-6 w-6 text-[#8B5CF6]"
-                  >
-                    <path
-                      d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
-                    ></path>
-                  </svg>
-                  <a
-                    href="tel:8535861245"
-                    class="text-gray-300 hover:text-[#8B5CF6]"
-                  >
-                    +91 8535861245
-                  </a>
-                </div>
-                <div class="flex items-center space-x-4">
-                  <img
-                    src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
-                    alt="GitHub Logo"
-                    class="h-6 w-6"
-                  />
-                  <a
-                    href="https://github.com/dev-sujan"
-                    class="text-gray-300 hover:text-[#8B5CF6]"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    github.com/dev-sujan
-                  </a>
-                </div>
-                <div class="flex items-center space-x-4">
-                  <img
-                    src="https://cdn-icons-png.flaticon.com/512/174/174857.png"
-                    alt="LinkedIn Logo"
-                    class="h-6 w-6"
-                  />
-                  <a
-                    href="https://linkedin.com/in/sujan-maji"
-                    class="text-gray-300 hover:text-[#8B5CF6]"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    linkedin.com/in/sujan-maji
-                  </a>
-                </div>
-              </div>
+        <!-- Chelsea Peers -->
+        <div class="brand-card glass-panel reveal">
+          <div class="brand-img-wrapper">
+            <img src="assets/chelsea_peers.png" alt="Chelsea Peers Storefront" class="brand-img">
+          </div>
+          <div class="brand-content">
+            <div class="brand-meta-row">
+              <span class="brand-role">Frontend Tuning</span>
+              <span class="brand-tech">HTML5 / WebP filters</span>
+            </div>
+            <h4 class="brand-title">Chelsea Peers</h4>
+            <p class="brand-text">
+              Restructured image delivery layouts to utilize next-gen formatting, drastically cutting down home page
+              image payload sizes without reducing resolution.
+            </p>
+            <a href="https://chelseapeers.com" target="_blank" class="brand-link">
+              Visit Live Store <i data-lucide="external-link" class="icon-xs"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Jewells -->
+        <div class="brand-card glass-panel reveal">
+          <div class="brand-img-wrapper">
+            <img src="assets/jewells.png" alt="Jewells Storefront" class="brand-img">
+          </div>
+          <div class="brand-content">
+            <div class="brand-meta-row">
+              <span class="brand-role">Custom Features Dev</span>
+              <span class="brand-tech">Shopify APIs / JSON</span>
+            </div>
+            <h4 class="brand-title">Jewells</h4>
+            <p class="brand-text">
+              Integrated custom Shopify app features and configured AJAX cart states to enable smooth, real-time product
+              selections and faster checkout flows.
+            </p>
+            <a href="https://jewells.com" target="_blank" class="brand-link">
+              Visit Live Store <i data-lucide="external-link" class="icon-xs"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Subsection 2: Custom Engineering Tools -->
+      <h3 class="subsection-title-divider reveal" style="margin-top: 4rem;"><i data-lucide="cpu"
+          class="text-primary"></i> Custom Engineering Tools</h3>
+      <div class="projects-grid">
+        <!-- Project 1 -->
+        <div class="project-card glass-panel reveal">
+          <div class="project-header">
+            <div class="project-icon-wrapper optimizer-gradient"><i data-lucide="zap"></i></div>
+            <div class="project-tags">
+              <span class="p-tag">React</span>
+              <span class="p-tag">NodeJS</span>
+              <span class="p-tag">Gemini API</span>
+            </div>
+          </div>
+          <h3 class="project-title">ShopifyAI Optimizer</h3>
+          <p class="project-text">
+            An automated storefront performance diagnostics dashboard. It scans theme templates, detects rendering
+            bottlenecks (such as unused JS or large images), and queries Google Gemini AI to generate optimized Liquid
+            syntax replacements.
+          </p>
+          <div class="project-footer">
+            <span class="project-status"><span class="status-indicator success"></span> Running Dev</span>
+            <a href="#" target="_blank" class="project-link">
+              Open App <i data-lucide="external-link" class="icon-xs"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="project-card glass-panel reveal">
+          <div class="project-header">
+            <div class="project-icon-wrapper shipsync-gradient"><i data-lucide="anchor"></i></div>
+            <div class="project-tags">
+              <span class="p-tag">React</span>
+              <span class="p-tag">Express</span>
+              <span class="p-tag">Pixelmatch</span>
+            </div>
+          </div>
+          <h3 class="project-title">ShipSync QA</h3>
+          <p class="project-text">
+            A layout visual regression suite designed for e-commerce CI/CD. It receives webhook notifications on code
+            pushes, captures automated screenshots of key templates, and compares them using pixel-matching to detect
+            visual anomalies.
+          </p>
+          <div class="project-footer">
+            <span class="project-status"><span class="status-indicator success"></span> Running Dev</span>
+            <a href="#" target="_blank" class="project-link">
+              Open App <i data-lucide="external-link" class="icon-xs"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Subsection 3: Java Enterprise & Real-Time Applications -->
+      <h3 class="subsection-title-divider reveal" style="margin-top: 4rem;"><i data-lucide="server"
+          class="text-primary"></i> Java Enterprise & Real-Time Applications</h3>
+      <div class="projects-grid">
+        <!-- SnapLink -->
+        <div class="project-card glass-panel reveal">
+          <div class="project-header">
+            <div class="project-icon-wrapper snaplink-gradient"><i data-lucide="link"></i></div>
+            <div class="project-tags">
+              <span class="p-tag">Spring Boot</span>
+              <span class="p-tag">React</span>
+              <span class="p-tag">H2 DB</span>
+            </div>
+          </div>
+          <h3 class="project-title">SnapLink URL Shortener</h3>
+          <p class="project-text">
+            A high-performance URL shortening and analytics platform. Automatically encodes long URLs into
+            mathematically guaranteed 6-character short codes using a Base62 sequence mapping. Tracks accurate real-time
+            click metrics using HTTP 302 temporary redirects and handles expiration TTL policies.
+          </p>
+          <div class="project-footer">
+            <span class="project-status"><span class="status-indicator success"></span> Running Dev</span>
+            <a href="#" target="_blank" class="project-link">
+              Open App <i data-lucide="external-link" class="icon-xs"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- SyncShare -->
+        <div class="project-card glass-panel reveal">
+          <div class="project-header">
+            <div class="project-icon-wrapper syncshare-gradient"><i data-lucide="users"></i></div>
+            <div class="project-tags">
+              <span class="p-tag">Spring Boot</span>
+              <span class="p-tag">WebSockets</span>
+              <span class="p-tag">Monaco Editor</span>
+            </div>
+          </div>
+          <h3 class="project-title">SyncShare Collaboration</h3>
+          <p class="project-text">
+            A real-time workspace for developer collaboration. Integrates the Monaco Editor engine to support
+            synchronized keystroke editing, room chat, and UUID-based secure room access. Built with raw Java WebSockets
+            for state synchronization and supports drag-and-drop file sharing up to 50MB.
+          </p>
+          <div class="project-footer">
+            <span class="project-status"><span class="status-indicator success"></span> Running Dev</span>
+            <a href="#" target="_blank" class="project-link">
+              Open App <i data-lucide="external-link" class="icon-xs"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Live Engineering Playground Section -->
+    <section id="playground" class="playground-section reveal">
+      <div class="section-header">
+        <h2 class="section-title">Live Engineering Playground</h2>
+        <p class="section-subtitle">Interact with miniature local simulations of the performance and visual regression
+          pipelines.</p>
+      </div>
+
+      <div class="playground-container">
+        <!-- Selector buttons for simulators -->
+        <div class="playground-tabs">
+          <button class="play-tab-btn active" id="tabBtnAudit">
+            <i data-lucide="activity"></i> Performance Audit Sim
+          </button>
+          <button class="play-tab-btn" id="tabBtnRegression">
+            <i data-lucide="sliders"></i> Visual Regression Sim
+          </button>
+        </div>
+
+        <!-- Simulator Stage -->
+        <div class="playground-stage glass-panel">
+
+          <!-- Simulator 1: Performance Audit -->
+          <div class="sim-view active" id="simViewAudit">
+            <div class="sim-intro">
+              <h4>Liquid Theme Audit Simulator</h4>
+              <p>Input a store domain to scan for render-blocking elements and request AI optimizations.</p>
             </div>
 
-            <!-- Contact Form -->
-            <div>
-              <form class="space-y-4">
-                <div>
-                  <label
-                    class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                    for="name"
-                  >
-                    Name
-                  </label>
-                  <input
-                    class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                    id="name"
-                    placeholder="Your Name"
-                    required=""
-                    type="text"
-                  />
+            <div class="sim-action-bar">
+              <input type="url" id="simAuditInput" placeholder="https://your-shopify-store.com"
+                value="https://storefront-demo.shopify.com" class="form-input">
+              <button class="btn btn-primary" id="runSimAuditBtn">Analyze Store</button>
+            </div>
+
+            <!-- Audit Loader -->
+            <div class="sim-loader hidden" id="simAuditLoader">
+              <div class="loading-ring"></div>
+              <p>Scanning Liquid snippets for layout shifts...</p>
+            </div>
+
+            <!-- Audit Results Grid (hidden initially) -->
+            <div class="sim-results hidden" id="simAuditResults">
+              <div class="sim-gauge-row">
+                <div class="sim-gauge-card">
+                  <span class="gauge-number orange" id="simPerfScore">54</span>
+                  <span class="gauge-label">Performance</span>
                 </div>
-                <div>
-                  <label
-                    class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                    for="email"
-                  >
-                    Email
-                  </label>
-                  <input
-                    class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                    id="email"
-                    placeholder="your@email.com"
-                    required=""
-                    type="email"
-                  />
+                <div class="sim-gauge-card">
+                  <span class="gauge-number green">88</span>
+                  <span class="gauge-label">Accessibility</span>
                 </div>
-                <div>
-                  <label
-                    class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                    for="message"
-                  >
-                    Message
-                  </label>
-                  <textarea
-                    class="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                    id="message"
-                    rows="5"
-                    placeholder="Your message..."
-                    required=""
-                  ></textarea>
-                  <div class="flex justify-center pt-3">
-                    <button
-                      class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 bg-[#00FF00] text-[#0A2463] hover:bg-[#00CC00]"
-                      type="submit"
-                    >
-                      Send Message
-                    </button>
+                <div class="sim-gauge-card">
+                  <span class="gauge-number orange">72</span>
+                  <span class="gauge-label">Best Practices</span>
+                </div>
+              </div>
+
+              <div class="sim-finding-panel">
+                <div class="finding-header">
+                  <i data-lucide="alert-triangle" class="text-warning icon-sm"></i>
+                  <div>
+                    <h4 style="font-size: 0.95rem;">Opportunity: Serve Hero Image with High Fetchpriority</h4>
+                    <p style="font-size: 0.75rem; color: var(--color-text-muted);">The primary banner element delays
+                      Largest Contentful Paint (LCP) by 1.8s.</p>
                   </div>
                 </div>
-              </form>
+
+                <!-- AI Code Diff Playground -->
+                <div class="sim-diff-box">
+                  <div class="sim-code-column">
+                    <span class="column-tag danger">Suboptimal Liquid</span>
+                    <pre><code>&lt;div class="hero"&gt;
+  &lt;img src="{{ section.settings.img | img_url: '2000x' }}"&gt;
+&lt;/div&gt;</code></pre>
+                  </div>
+
+                  <div class="sim-code-column">
+                    <span class="column-tag success">AI Refactored Liquid</span>
+                    <pre><code class="text-green">&lt;link rel="preload" as="image" href="{{ section.settings.img | img_url: '1200x' }}" fetchpriority="high"&gt;
+&lt;img src="{{ section.settings.img | img_url: '1200x' }}" fetchpriority="high" loading="eager"&gt;</code></pre>
+                  </div>
+                </div>
+
+                <div class="sim-impact-footer">
+                  <i data-lucide="zap" class="text-primary icon-xs"></i> Expected Performance Gain: <strong>+18
+                    Lighthouse Points (~800ms LCP decrease)</strong>
+                </div>
+              </div>
             </div>
           </div>
+
+          <!-- Simulator 2: Visual Regression -->
+          <div class="sim-view" id="simViewRegression">
+            <div class="sim-intro">
+              <h4>CI/CD Visual Regression Simulator</h4>
+              <p>Trigger a mock GitHub Actions layout check. Use the slider to drag and inspect pixel diff highlights.
+              </p>
+            </div>
+
+            <div style="margin-bottom: 1.25rem;">
+              <button class="btn btn-primary" id="runSimRegBtn">Trigger Webhook Build</button>
+            </div>
+
+            <!-- Build loader -->
+            <div class="sim-loader hidden" id="simRegLoader">
+              <div class="loading-ring"></div>
+              <p>Executing Playwright tests & rendering diff map...</p>
+            </div>
+
+            <!-- Slider Area -->
+            <div class="sim-results hidden" id="simRegResults">
+
+              <div class="sim-slider-container" id="simSliderContainer">
+                <!-- Baseline Image -->
+                <div class="sim-slider-img baseline">
+                  <!-- Simple Vector SVG representation for baseline -->
+                  <svg width="100%" height="100%" viewBox="0 0 600 320" xmlns="http://www.w3.org/2000/svg"
+                    style="background:#0F172A; display:block;">
+                    <rect x="0" y="0" width="600" height="50" fill="#1E293B" /> <!-- Header -->
+                    <circle cx="45" cy="25" r="10" fill="#10B981" /> <!-- Logo -->
+                    <rect x="30" y="70" width="540" height="110" fill="#334155" rx="4" /> <!-- Hero banner -->
+                    <rect x="60" y="110" width="120" height="30" fill="#10B981" rx="4" /> <!-- Button -->
+                    <rect x="30" y="200" width="160" height="90" fill="#1E293B" stroke="#334155" stroke-width="2"
+                      rx="4" /> <!-- Card 1 -->
+                    <rect x="220" y="200" width="160" height="90" fill="#1E293B" stroke="#334155" stroke-width="2"
+                      rx="4" /> <!-- Card 2 -->
+                    <rect x="410" y="200" width="160" height="90" fill="#1E293B" stroke="#334155" stroke-width="2"
+                      rx="4" /> <!-- Card 3 -->
+                  </svg>
+                </div>
+
+                <!-- Current Image (clipped) -->
+                <div class="sim-slider-img current" id="simSliderCurrent">
+                  <!-- Simple Vector SVG representation for current build (card 2 missing, button shifted) -->
+                  <svg width="600" height="320" viewBox="0 0 600 320" xmlns="http://www.w3.org/2000/svg"
+                    style="background:#0F172A; display:block;">
+                    <rect x="0" y="0" width="600" height="50" fill="#1E293B" /> <!-- Header -->
+                    <circle cx="45" cy="25" r="10" fill="#10B981" /> <!-- Logo -->
+                    <rect x="30" y="70" width="540" height="110" fill="#334155" rx="4" /> <!-- Hero banner -->
+                    <rect x="250" y="110" width="120" height="30" fill="#EF4444" rx="4" />
+                    <!-- Button shifted & red! -->
+                    <rect x="30" y="200" width="160" height="90" fill="#1E293B" stroke="#334155" stroke-width="2"
+                      rx="4" /> <!-- Card 1 -->
+                    <!-- Card 2 missing! -->
+                    <rect x="410" y="200" width="160" height="90" fill="#1E293B" stroke="#334155" stroke-width="2"
+                      rx="4" /> <!-- Card 3 -->
+                  </svg>
+                </div>
+
+                <!-- Drag bar handle -->
+                <div class="sim-slider-handle" id="simSliderHandle">
+                  <div class="sim-slider-handle-btn">↔</div>
+                </div>
+
+                <span class="sim-label-tag left">Prod Baseline</span>
+                <span class="sim-label-tag right">Build #108 (PR)</span>
+              </div>
+
+              <!-- Terminal status log -->
+              <div class="sim-terminal">
+                <span class="term-prompt">$</span> npm run test:regression<br>
+                <span class="term-info">Initializing visual checks...</span><br>
+                <span class="term-warn">WARNING: Visual diff detected in Hero Button position.</span><br>
+                <span class="term-error">ERROR: Grid Item "Product Card 2" did not paint. Mismatch: 3.4% pixels.</span>
+              </div>
+            </div>
+          </div>
+
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- Footer -->
-      <footer class="bg-[#0A2463] py-4 text-center text-gray-300">
-        <p>&copy; 2024 Sujan Maji. All rights reserved.</p>
-      </footer>
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section reveal">
+      <div class="section-header">
+        <h2 class="section-title">Get In Touch</h2>
+        <p class="section-subtitle">Let's discuss Shopify storefront optimizations, testing pipelines, or engineering
+          opportunities.</p>
+      </div>
+
+      <div class="contact-container">
+        <div class="contact-info glass-panel">
+          <h3>Contact Information</h3>
+          <p>Feel free to reach out directly through email or social media channels.</p>
+
+          <div class="info-list">
+            <div class="info-list-item">
+              <i data-lucide="mail" class="text-primary"></i>
+              <span><a href="mailto:sujanmaji948@gmail.com">sujanmaji948@gmail.com</a></span>
+            </div>
+            <div class="info-list-item">
+              <i data-lucide="map-pin" class="text-primary"></i>
+              <span>Kolkata, India</span>
+            </div>
+            <div class="info-list-item">
+              <i data-lucide="file-text" class="text-primary"></i>
+              <span><a href="https://drive.google.com/file/d/1jLeSQ-Jrn95xq-8YIGHTYVrfqch9n6JA/view?usp=drive_link"
+                  target="_blank" style="text-decoration: underline;">View Resume (Google Drive)</a></span>
+            </div>
+          </div>
+
+          <div class="social-links">
+            <a href="https://github.com/dev-sujan" target="_blank" class="social-icon" aria-label="GitHub">
+              <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+              </svg>
+            </a>
+            <a href="https://linkedin.com/in/sujan-maji" target="_blank" class="social-icon" aria-label="LinkedIn">
+              <svg viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z" />
+              </svg>
+            </a>
+            <a href="mailto:sujanmaji948@gmail.com" class="social-icon" aria-label="Email">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+                <rect width="20" height="16" x="2" y="4" rx="2" />
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Simple Contact Form -->
+        <form class="contact-form glass-panel" id="contactForm">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="form-group">
+              <label for="cName">Your Name</label>
+              <input type="text" id="cName" placeholder="John Doe" required class="form-input">
+            </div>
+            <div class="form-group">
+              <label for="cEmail">Email Address</label>
+              <input type="email" id="cEmail" placeholder="john@example.com" required class="form-input">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="cMsg">Message</label>
+            <textarea id="cMsg" placeholder="Describe your project or inquiry..." required class="form-input"
+              style="height: 120px; resize: none;"></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Send Message</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- Interactive Timeline Dialog Modal -->
+  <div class="modal-overlay" id="timelineModal" aria-hidden="true" role="dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modalTitle">Details</h3>
+        <button class="modal-close" id="modalClose" aria-label="Close details modal">&times;</button>
+      </div>
+      <div class="modal-body" id="modalBody">
+        <!-- Dynmically rendered details go here -->
+      </div>
     </div>
+  </div>
 
-    <script>
-      const toggleButton = document.getElementById("hamburger-btn");
-      const mobileNav = document.getElementById("mobile-nav");
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
 
-      toggleButton.addEventListener("click", toggleNavBar);
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2026 Sujan Maji. All rights reserved.</p>
+  </footer>
 
-      document
-        .querySelectorAll("#mobile-nav nav a")
-        .forEach((link) => link.addEventListener("click", toggleNavBar));
+  <script src="app.js"></script>
+</body>
 
-      function toggleNavBar() {
-        mobileNav.classList.toggle("hidden");
-        if (!mobileNav.classList.contains("hidden")) {
-          document.querySelector("#hamburger-icon").classList.add("hidden");
-          document.querySelector("#close-icon").classList.remove("hidden");
-        } else {
-          document.querySelector("#hamburger-icon").classList.remove("hidden");
-          document.querySelector("#close-icon").classList.add("hidden");
-        }
-      }
-    </script>
-  </body>
 </html>
