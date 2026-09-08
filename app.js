@@ -493,161 +493,479 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 400);
   }
 
-  /* --- Playground Simulator Controllers --- */
+  /* --- Interactive Project Showcase Controllers (Virtual Lounge & FindXL) --- */
 
-  // Simulator tabs swapping
-  const tabBtnAudit = document.getElementById('tabBtnAudit');
-  const tabBtnRegression = document.getElementById('tabBtnRegression');
-  const simViewAudit = document.getElementById('simViewAudit');
-  const simViewRegression = document.getElementById('simViewRegression');
+  // 1. Sandbox Tabs Switching
+  const tabBtnLounge = document.getElementById('tabBtnLounge');
+  const tabBtnFindXL = document.getElementById('tabBtnFindXL');
+  const simViewLounge = document.getElementById('simViewLounge');
+  const simViewFindXL = document.getElementById('simViewFindXL');
 
-  if (tabBtnAudit && tabBtnRegression && simViewAudit && simViewRegression) {
-    tabBtnAudit.addEventListener('click', () => {
-      tabBtnAudit.classList.add('active');
-      tabBtnRegression.classList.remove('active');
-      simViewAudit.classList.add('active');
-      simViewRegression.classList.remove('active');
+  if (tabBtnLounge && tabBtnFindXL && simViewLounge && simViewFindXL) {
+    tabBtnLounge.addEventListener('click', () => {
+      tabBtnLounge.classList.add('active');
+      tabBtnFindXL.classList.remove('active');
+      simViewLounge.classList.add('active');
+      simViewFindXL.classList.remove('active');
     });
 
-    tabBtnRegression.addEventListener('click', () => {
-      tabBtnRegression.classList.add('active');
-      tabBtnAudit.classList.remove('active');
-      simViewRegression.classList.add('active');
-      simViewAudit.classList.remove('active');
-    });
-  }
-
-  // Simulator 1: Performance Audit
-  const runSimAuditBtn = document.getElementById('runSimAuditBtn');
-  const simAuditLoader = document.getElementById('simAuditLoader');
-  const simAuditResults = document.getElementById('simAuditResults');
-  const simPerfScore = document.getElementById('simPerfScore');
-
-  if (runSimAuditBtn && simAuditLoader && simAuditResults && simPerfScore) {
-    runSimAuditBtn.addEventListener('click', () => {
-      runSimAuditBtn.disabled = true;
-      simAuditLoader.classList.remove('hidden');
-      simAuditResults.classList.add('hidden');
-
-      setTimeout(() => {
-        simAuditLoader.classList.add('hidden');
-        simAuditResults.classList.remove('hidden');
-        runSimAuditBtn.disabled = false;
-
-        // Random target score
-        const targetScore = Math.floor(Math.random() * 8) + 90; // 90 - 97 (optimized score!)
-        
-        // Counter animation for gauge
-        let currentScore = 0;
-        const duration = 800; // ms
-        const interval = 15;
-        const step = targetScore / (duration / interval);
-        
-        const auditCounter = setInterval(() => {
-          currentScore += step;
-          if (currentScore >= targetScore) {
-            currentScore = targetScore;
-            clearInterval(auditCounter);
-          }
-          simPerfScore.textContent = Math.floor(currentScore);
-        }, interval);
-
-        showToast('Performance theme audit completed successfully!', 'success');
-      }, 1500);
+    tabBtnFindXL.addEventListener('click', () => {
+      tabBtnFindXL.classList.add('active');
+      tabBtnLounge.classList.remove('active');
+      simViewFindXL.classList.add('active');
+      simViewLounge.classList.remove('active');
+      renderFindXL();
     });
   }
 
-  // Simulator 2: Visual Regression & Slider
-  const runSimRegBtn = document.getElementById('runSimRegBtn');
-  const simRegLoader = document.getElementById('simRegLoader');
-  const simRegResults = document.getElementById('simRegResults');
-  
-  const sliderContainer = document.getElementById('simSliderContainer');
-  const sliderCurrent = document.getElementById('simSliderCurrent');
-  const sliderHandle = document.getElementById('simSliderHandle');
-  let isDragging = false;
+  // 2. Virtual Social Lounge Interactive Engine
+  const loungeMessages = document.getElementById('loungeMessages');
+  const loungeChatForm = document.getElementById('loungeChatForm');
+  const loungeChatInput = document.getElementById('loungeChatInput');
+  const vanishToggleBtn = document.getElementById('vanishToggleBtn');
+  const vanishStatusText = document.getElementById('vanishStatusText');
+  const replyBanner = document.getElementById('replyBanner');
+  const replyTargetText = document.getElementById('replyTargetText');
+  const replyCloseBtn = document.getElementById('replyCloseBtn');
+  const slashChips = document.querySelectorAll('.slash-chip');
 
-  if (runSimRegBtn && simRegLoader && simRegResults) {
-    runSimRegBtn.addEventListener('click', () => {
-      runSimRegBtn.disabled = true;
-      simRegLoader.classList.remove('hidden');
-      simRegResults.classList.add('hidden');
+  let isVanishMode = false;
+  let activeReply = null;
 
-      setTimeout(() => {
-        simRegLoader.classList.add('hidden');
-        simRegResults.classList.remove('hidden');
-        runSimRegBtn.disabled = false;
-        
-        // Reset slider to middle position
-        updateSlider(50);
-
-        showToast('CI/CD build layout analysis succeeded!', 'success');
-      }, 1800);
+  // Vanish Mode Toggle
+  if (vanishToggleBtn && vanishStatusText) {
+    vanishToggleBtn.addEventListener('click', () => {
+      isVanishMode = !isVanishMode;
+      vanishToggleBtn.classList.toggle('active', isVanishMode);
+      vanishStatusText.textContent = isVanishMode ? 'Vanish: ON 🔥' : 'Vanish: OFF';
+      showToast(isVanishMode ? '🔥 Vanish Mode Activated! Messages auto-burn in 5s.' : 'Vanish Mode Deactivated.', isVanishMode ? 'warn' : 'info');
     });
   }
 
-  // Visual Slider Dragging Logic
-  const updateSlider = (percent) => {
-    if (!sliderCurrent || !sliderHandle) return;
-    const capped = Math.max(0, Math.min(100, percent));
-    sliderCurrent.style.width = `${capped}%`;
-    sliderHandle.style.left = `${capped}%`;
+  // Floating Heart Generator function
+  const triggerHeartBurst = (x, y, parentElement) => {
+    const heart = document.createElement('div');
+    heart.className = 'floating-heart';
+    heart.textContent = '❤️';
+    heart.style.left = `${x}px`;
+    heart.style.top = `${y}px`;
+    parentElement.appendChild(heart);
+    setTimeout(() => heart.remove(), 950);
   };
 
-  const handleDrag = (clientX) => {
-    if (!sliderContainer) return;
-    const rect = sliderContainer.getBoundingClientRect();
-    const x = clientX - rect.left;
-    const percentage = (x / rect.width) * 100;
-    updateSlider(percentage);
+  // Attach reaction & reply events to messages
+  const bindMessageEvents = (msgEl) => {
+    const bubble = msgEl.querySelector('.msg-bubble');
+    const heartBtn = msgEl.querySelector('.heart-btn');
+    const replyBtn = msgEl.querySelector('.reply-btn');
+    const author = msgEl.querySelector('.msg-author')?.textContent || 'User';
+
+    // Double tap / click heart on bubble
+    if (bubble) {
+      let lastTap = 0;
+      bubble.addEventListener('click', (e) => {
+        const currentTime = new Date().getTime();
+        const tapLength = currentTime - lastTap;
+        if (tapLength < 350 && tapLength > 0) {
+          // Double tap detected!
+          const rect = msgEl.getBoundingClientRect();
+          triggerHeartBurst(e.clientX - rect.left, e.clientY - rect.top, msgEl);
+          showToast('❤️ Heart reaction sent!', 'success');
+        }
+        lastTap = currentTime;
+      });
+    }
+
+    if (heartBtn) {
+      heartBtn.addEventListener('click', (e) => {
+        const rect = msgEl.getBoundingClientRect();
+        triggerHeartBurst(e.clientX - rect.left, e.clientY - rect.top, msgEl);
+      });
+    }
+
+    if (replyBtn) {
+      replyBtn.addEventListener('click', () => {
+        const previewText = bubble ? bubble.textContent.trim().slice(0, 45) + '...' : '';
+        activeReply = { author, text: previewText };
+        if (replyBanner && replyTargetText) {
+          replyTargetText.textContent = `Replying to ${author}: "${previewText}"`;
+          replyBanner.classList.remove('hidden');
+          if (loungeChatInput) loungeChatInput.focus();
+        }
+      });
+    }
   };
 
-  if (sliderHandle && sliderContainer) {
-    // Attach drag events to the handle
-    sliderHandle.addEventListener('mousedown', (e) => {
-      isDragging = true;
+  document.querySelectorAll('.chat-msg').forEach(bindMessageEvents);
+
+  if (replyCloseBtn && replyBanner) {
+    replyCloseBtn.addEventListener('click', () => {
+      activeReply = null;
+      replyBanner.classList.add('hidden');
+    });
+  }
+
+  // Slash commands quick click
+  slashChips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      const cmd = chip.getAttribute('data-cmd');
+      if (cmd === '/shrug') {
+        if (loungeChatInput) {
+          loungeChatInput.value += ' ¯\\_(ツ)_/¯';
+          loungeChatInput.focus();
+        }
+      } else {
+        executeSlashCommand(cmd);
+      }
+    });
+  });
+
+  const executeSlashCommand = (cmd) => {
+    if (cmd === '/dice') {
+      const roll = Math.floor(Math.random() * 6) + 1;
+      postMessage('Sujan (Guest)', `🎲 Rolled a dice: **${roll}**!`, false);
+    } else if (cmd === '/poll') {
+      postMessage('Sujan (Guest)', `📊 Quick Poll: Best P2P feature?\n1️⃣ WebRTC Video (42%)\n2️⃣ Audio Equalizer (35%)\n3️⃣ Vanish Chat (23%)`, false);
+    } else if (cmd === '/8ball') {
+      const answers = ['Without a doubt!', 'Yes definitely.', 'Ask again later.', 'My sources say yes! 🚀', 'Outlook good.'];
+      const pick = answers[Math.floor(Math.random() * answers.length)];
+      postMessage('Magic 8-Ball 🎱', pick, false);
+    }
+  };
+
+  const postMessage = (author, text, isVanishing) => {
+    if (!loungeMessages) return;
+
+    const msgDiv = document.createElement('div');
+    msgDiv.className = 'chat-msg';
+    
+    let replyHtml = '';
+    if (activeReply) {
+      replyHtml = `<div style="font-size:0.7rem; color:var(--color-primary); margin-bottom:0.2rem; border-left: 2px solid var(--color-primary); padding-left:0.4rem;">↩️ In reply to ${activeReply.author}</div>`;
+      activeReply = null;
+      if (replyBanner) replyBanner.classList.add('hidden');
+    }
+
+    const vanishTag = isVanishing ? ' <span style="color:#f87171; font-size:0.65rem; font-weight:bold;">[🔥 5s Vanish]</span>' : '';
+
+    msgDiv.innerHTML = `
+      <div class="msg-avatar" style="background: linear-gradient(135deg, #6366f1, #a855f7);">S</div>
+      <div class="msg-body">
+        <div class="msg-meta">
+          <span class="msg-author">${author}</span>
+          <span class="msg-time">Just now${vanishTag}</span>
+        </div>
+        ${replyHtml}
+        <div class="msg-bubble ${isVanishing ? 'vanish' : ''}">${text}</div>
+      </div>
+      <div class="msg-quick-actions">
+        <button class="msg-act-btn heart-btn" data-action="heart" type="button" title="Heart reaction">❤️</button>
+        <button class="msg-act-btn reply-btn" data-action="reply" type="button" title="Swipe to reply">↩️</button>
+      </div>
+    `;
+
+    loungeMessages.appendChild(msgDiv);
+    bindMessageEvents(msgDiv);
+    loungeMessages.scrollTop = loungeMessages.scrollHeight;
+
+    if (isVanishing) {
+      setTimeout(() => {
+        const bubble = msgDiv.querySelector('.msg-bubble');
+        if (bubble) bubble.classList.add('burn-out');
+        setTimeout(() => {
+          msgDiv.remove();
+          showToast('🔥 Vanish message was safely destroyed!', 'info');
+        }, 650);
+      }, 5000);
+    }
+  };
+
+  if (loungeChatForm && loungeChatInput) {
+    loungeChatForm.addEventListener('submit', (e) => {
       e.preventDefault();
-    });
+      const val = loungeChatInput.value.trim();
+      if (!val) return;
 
-    // Also support dragging directly on the container for smoother UX
-    sliderContainer.addEventListener('mousedown', (e) => {
-      isDragging = true;
-      handleDrag(e.clientX);
-      e.preventDefault();
+      if (val.startsWith('/')) {
+        executeSlashCommand(val);
+      } else {
+        postMessage('Sujan (Guest)', val, isVanishMode);
+      }
+      loungeChatInput.value = '';
     });
+  }
 
-    document.addEventListener('mousemove', (e) => {
-      if (!isDragging) return;
-      handleDrag(e.clientX);
+  // 3. Audio Equalizer Canvas Animation
+  const eqCanvas = document.getElementById('loungeEqCanvas');
+  const eqToggleBtn = document.getElementById('eqToggleBtn');
+  const eqPlayIcon = document.getElementById('eqPlayIcon');
+  const eqPlayLabel = document.getElementById('eqPlayLabel');
+  const volLofi = document.getElementById('volLofi');
+  const volRain = document.getElementById('volRain');
+  const volCafe = document.getElementById('volCafe');
+  const volLofiVal = document.getElementById('volLofiVal');
+  const volRainVal = document.getElementById('volRainVal');
+  const volCafeVal = document.getElementById('volCafeVal');
+
+  if (volLofi && volLofiVal) {
+    volLofi.addEventListener('input', (e) => volLofiVal.textContent = `${e.target.value}%`);
+  }
+  if (volRain && volRainVal) {
+    volRain.addEventListener('input', (e) => volRainVal.textContent = `${e.target.value}%`);
+  }
+  if (volCafe && volCafeVal) {
+    volCafe.addEventListener('input', (e) => volCafeVal.textContent = `${e.target.value}%`);
+  }
+
+  if (eqCanvas) {
+    const eqCtx = eqCanvas.getContext('2d');
+    let isEqPlaying = true;
+    let eqBars = Array.from({ length: 24 }, () => Math.random() * 45 + 15);
+
+    const drawEq = () => {
+      eqCtx.clearRect(0, 0, eqCanvas.width, eqCanvas.height);
+      const barWidth = (eqCanvas.width / eqBars.length) - 4;
+
+      for (let i = 0; i < eqBars.length; i++) {
+        if (isEqPlaying) {
+          const lofiFactor = (volLofi ? parseInt(volLofi.value) : 70) / 100;
+          eqBars[i] += (Math.random() - 0.5) * 10 * lofiFactor;
+          eqBars[i] = Math.max(6, Math.min(eqCanvas.height - 10, eqBars[i]));
+        }
+
+        const x = i * (barWidth + 4);
+        const y = eqCanvas.height - eqBars[i];
+
+        const grad = eqCtx.createLinearGradient(0, eqCanvas.height, 0, 0);
+        grad.addColorStop(0, '#8b5cf6');
+        grad.addColorStop(1, '#ec4899');
+
+        eqCtx.fillStyle = grad;
+        eqCtx.beginPath();
+        if (eqCtx.roundRect) {
+          eqCtx.roundRect(x, y, barWidth, eqBars[i], 3);
+        } else {
+          eqCtx.rect(x, y, barWidth, eqBars[i]);
+        }
+        eqCtx.fill();
+      }
+
+      requestAnimationFrame(drawEq);
+    };
+
+    drawEq();
+
+    if (eqToggleBtn) {
+      eqToggleBtn.addEventListener('click', () => {
+        isEqPlaying = !isEqPlaying;
+        if (eqPlayLabel) eqPlayLabel.textContent = isEqPlaying ? 'Pause Spectrum' : 'Resume Spectrum';
+        if (eqPlayIcon) {
+          eqPlayIcon.setAttribute('data-lucide', isEqPlaying ? 'pause' : 'play');
+          if (typeof lucide !== 'undefined') lucide.createIcons();
+        }
+      });
+    }
+  }
+
+  // TTS Reader
+  const btnSpeakDemo = document.getElementById('btnSpeakDemo');
+  if (btnSpeakDemo) {
+    btnSpeakDemo.addEventListener('click', () => {
+      const msgs = document.querySelectorAll('.lounge-messages .msg-bubble');
+      const lastMsg = msgs[msgs.length - 1]?.textContent || 'Welcome to the Virtual Lounge!';
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(lastMsg);
+        utterance.rate = 1.0;
+        utterance.pitch = 1.0;
+        window.speechSynthesis.speak(utterance);
+        showToast('🔊 Text-to-Speech speaking: "' + lastMsg.slice(0, 30) + '..."', 'info');
+      } else {
+        showToast('🔊 Speech synthesizer simulated for: "' + lastMsg.slice(0, 30) + '..."', 'info');
+      }
     });
+  }
 
-    document.addEventListener('mouseup', () => {
-      isDragging = false;
-    });
+  // 4. FindXL Search Engine
+  const sampleProducts = [
+    { sku: "XL-0101", name: "Pro Studio Wireless Headphones", category: "Audio", price: "$299.00", stock: 84, status: "in-stock" },
+    { sku: "XL-0102", name: "Ultra-Light Carbon Mechanical Keyboard", category: "Accessories", price: "$149.00", stock: 38, status: "in-stock" },
+    { sku: "XL-0103", name: "4K HDR Ultra-Wide Gaming Display", category: "Electronics", price: "$899.99", stock: 4, status: "low-stock" },
+    { sku: "XL-0104", name: "Smart Fitness Watch V3 Titanium", category: "Wearables", price: "$349.50", stock: 62, status: "in-stock" },
+    { sku: "XL-0105", name: "NVMe M.2 2TB Extreme SSD", category: "Storage", price: "$189.00", stock: 12, status: "in-stock" },
+    { sku: "XL-0106", name: "Noise-Cancelling Studio Earbuds Pro", category: "Audio", price: "$179.00", stock: 0, status: "out-of-stock" },
+    { sku: "XL-0107", name: "Ergonomic Vertical Optical Mouse", category: "Accessories", price: "$69.99", stock: 53, status: "in-stock" },
+    { sku: "XL-0108", name: "Thunderbolt 4 Multi-Port Docking Station", category: "Electronics", price: "$229.00", stock: 21, status: "in-stock" },
+    { sku: "XL-0109", name: "External Rugged 4TB Backup Drive", category: "Storage", price: "$139.95", stock: 3, status: "low-stock" },
+    { sku: "XL-0110", name: "Smart Health & Sleep Tracker Ring", category: "Wearables", price: "$279.00", stock: 19, status: "in-stock" },
+    { sku: "XL-0111", name: "Broadcast USB Condenser Microphone", category: "Audio", price: "$129.99", stock: 45, status: "in-stock" },
+    { sku: "XL-0112", name: "USB-C Magnetic Braided Cable (2m)", category: "Accessories", price: "$24.50", stock: 140, status: "in-stock" },
+    { sku: "XL-0113", name: "Portable Dual-Screen Laptop Extender", category: "Electronics", price: "$329.00", stock: 2, status: "low-stock" },
+    { sku: "XL-0114", name: "Biometric Heart Rate Sport Armband", category: "Wearables", price: "$89.00", stock: 31, status: "in-stock" },
+    { sku: "XL-0115", name: "High-Speed MicroSDXC 512GB Card", category: "Storage", price: "$59.99", stock: 0, status: "out-of-stock" },
+    { sku: "XL-0116", name: "Surround Sound Home Theater Bar", category: "Audio", price: "$499.00", stock: 14, status: "in-stock" },
+    { sku: "XL-0117", name: "Aluminium Laptop Cooling Stand Pro", category: "Accessories", price: "$49.95", stock: 75, status: "in-stock" },
+    { sku: "XL-0118", name: "Wi-Fi 7 Tri-Band Mesh Router Hub", category: "Electronics", price: "$399.00", stock: 18, status: "in-stock" },
+    { sku: "XL-0119", name: "Solar Charging Rugged Adventure Watch", category: "Wearables", price: "$449.00", stock: 5, status: "low-stock" },
+    { sku: "XL-0120", name: "Enterprise NVMe PCIe 4.0 4TB SSD", category: "Storage", price: "$379.00", stock: 22, status: "in-stock" },
+    { sku: "XL-0121", name: "Reference Studio Monitor Speakers", category: "Audio", price: "$349.00", stock: 11, status: "in-stock" },
+    { sku: "XL-0122", name: "Desk Mat XXL Spill-Resistant Felt", category: "Accessories", price: "$34.00", stock: 88, status: "in-stock" },
+    { sku: "XL-0123", name: "4K 60FPS Streaming Webcam with Ring Light", category: "Electronics", price: "$159.00", stock: 0, status: "out-of-stock" },
+    { sku: "XL-0124", name: "Smart ECG Health Vital Monitor", category: "Wearables", price: "$199.00", stock: 27, status: "in-stock" },
+    { sku: "XL-0125", name: "Compact External SSD 1TB USB 3.2", category: "Storage", price: "$99.00", stock: 63, status: "in-stock" },
+    { sku: "XL-0126", name: "Open-Back Audiophile Headphones", category: "Audio", price: "$429.00", stock: 7, status: "low-stock" },
+    { sku: "XL-0127", name: "Programmable Macro Stream Controller", category: "Accessories", price: "$149.99", stock: 33, status: "in-stock" },
+    { sku: "XL-0128", name: "GaN Fast Charger 140W Dual USB-C", category: "Electronics", price: "$79.00", stock: 110, status: "in-stock" },
+    { sku: "XL-0129", name: "Hybrid Smartwatch Sapphire Crystal", category: "Wearables", price: "$299.00", stock: 15, status: "in-stock" },
+    { sku: "XL-0130", name: "Hardware Encrypted USB 3.0 Flash Drive", category: "Storage", price: "$85.00", stock: 40, status: "in-stock" }
+  ];
 
-    // Touch Support for mobile viewports
-    sliderHandle.addEventListener('touchstart', () => {
-      isDragging = true;
-    });
+  const findxlQuery = document.getElementById('findxlQuery');
+  const findxlClearBtn = document.getElementById('findxlClearBtn');
+  const findxlCategoryFilter = document.getElementById('findxlCategoryFilter');
+  const findxlRegexToggle = document.getElementById('findxlRegexToggle');
+  const findxlTableBody = document.getElementById('findxlTableBody');
+  const findxlEmptyState = document.getElementById('findxlEmptyState');
+  const findxlPerfTime = document.getElementById('findxlPerfTime');
+  const findxlMatchCount = document.getElementById('findxlMatchCount');
+  const findxlExportBtn = document.getElementById('findxlExportBtn');
 
-    sliderContainer.addEventListener('touchstart', (e) => {
-      isDragging = true;
-      if (e.touches.length > 0) {
-        handleDrag(e.touches[0].clientX);
+  const highlightMatches = (text, query, isRegex) => {
+    if (!query) return text;
+    try {
+      const regex = isRegex ? new RegExp(`(${query})`, 'gi') : new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+      return text.replace(regex, '<mark class="findxl-highlight">$1</mark>');
+    } catch {
+      return text;
+    }
+  };
+
+  const renderFindXL = () => {
+    if (!findxlTableBody) return;
+
+    const t0 = performance.now();
+    const query = findxlQuery ? findxlQuery.value.trim() : '';
+    const category = findxlCategoryFilter ? findxlCategoryFilter.value : 'all';
+    const isRegex = findxlRegexToggle ? findxlRegexToggle.checked : false;
+
+    if (findxlClearBtn) {
+      findxlClearBtn.classList.toggle('hidden', !query);
+    }
+
+    let regexObj = null;
+    let regexError = false;
+    if (query && isRegex) {
+      try {
+        regexObj = new RegExp(query, 'i');
+      } catch {
+        regexError = true;
+      }
+    }
+
+    const filtered = sampleProducts.filter(item => {
+      if (category !== 'all' && item.category !== category) return false;
+      if (!query) return true;
+      if (regexError) return false;
+
+      const targetStr = `${item.sku} ${item.name} ${item.category} ${item.price} ${item.status}`;
+      if (isRegex && regexObj) {
+        return regexObj.test(targetStr);
+      } else {
+        return targetStr.toLowerCase().includes(query.toLowerCase());
       }
     });
 
-    document.addEventListener('touchmove', (e) => {
-      if (!isDragging) return;
-      if (e.touches.length > 0) {
-        handleDrag(e.touches[0].clientX);
-      }
-    });
+    const t1 = performance.now();
+    const elapsed = Math.max(0.1, (t1 - t0)).toFixed(1);
 
-    document.addEventListener('touchend', () => {
-      isDragging = false;
+    if (findxlPerfTime) findxlPerfTime.textContent = `${elapsed}ms`;
+    if (findxlMatchCount) findxlMatchCount.textContent = filtered.length;
+
+    if (filtered.length === 0) {
+      findxlTableBody.innerHTML = '';
+      if (findxlEmptyState) {
+        findxlEmptyState.classList.remove('hidden');
+        if (regexError) {
+          findxlEmptyState.querySelector('p').textContent = '⚠️ Invalid regular expression pattern. Please check your syntax.';
+        } else {
+          findxlEmptyState.querySelector('p').textContent = 'No matching spreadsheet rows found. Try adjusting your query or category.';
+        }
+      }
+      return;
+    }
+
+    if (findxlEmptyState) findxlEmptyState.classList.add('hidden');
+
+    findxlTableBody.innerHTML = filtered.map(item => {
+      const statusLabel = item.status === 'in-stock' ? 'In Stock' : item.status === 'low-stock' ? 'Low Stock' : 'Out of Stock';
+      return `
+        <tr>
+          <td class="findxl-sku">${highlightMatches(item.sku, query, isRegex)}</td>
+          <td><strong>${highlightMatches(item.name, query, isRegex)}</strong></td>
+          <td>${highlightMatches(item.category, query, isRegex)}</td>
+          <td>${highlightMatches(item.price, query, isRegex)}</td>
+          <td>${item.stock} units</td>
+          <td><span class="stock-badge ${item.status}">${statusLabel}</span></td>
+        </tr>
+      `;
+    }).join('');
+  };
+
+  if (findxlQuery) {
+    findxlQuery.addEventListener('input', renderFindXL);
+  }
+  if (findxlClearBtn) {
+    findxlClearBtn.addEventListener('click', () => {
+      findxlQuery.value = '';
+      renderFindXL();
+      findxlQuery.focus();
     });
   }
+  if (findxlCategoryFilter) {
+    findxlCategoryFilter.addEventListener('change', renderFindXL);
+  }
+  if (findxlRegexToggle) {
+    findxlRegexToggle.addEventListener('change', renderFindXL);
+  }
+
+  if (findxlExportBtn) {
+    findxlExportBtn.addEventListener('click', () => {
+      const query = findxlQuery ? findxlQuery.value.trim() : '';
+      const category = findxlCategoryFilter ? findxlCategoryFilter.value : 'all';
+      const isRegex = findxlRegexToggle ? findxlRegexToggle.checked : false;
+
+      let regexObj = null;
+      if (query && isRegex) {
+        try { regexObj = new RegExp(query, 'i'); } catch {}
+      }
+
+      const filtered = sampleProducts.filter(item => {
+        if (category !== 'all' && item.category !== category) return false;
+        if (!query) return true;
+        const targetStr = `${item.sku} ${item.name} ${item.category} ${item.price} ${item.status}`;
+        return isRegex && regexObj ? regexObj.test(targetStr) : targetStr.toLowerCase().includes(query.toLowerCase());
+      });
+
+      let csv = 'SKU,Product Name,Category,Price,Inventory Units,Status\n';
+      filtered.forEach(r => {
+        csv += `"${r.sku}","${r.name.replace(/"/g, '""')}","${r.category}","${r.price}",${r.stock},"${r.status}"\n`;
+      });
+
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'findxl_export.csv';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast(`Exported ${filtered.length} rows to findxl_export.csv (Client-side)!`, 'success');
+    });
+  }
+
+  // Initial render of FindXL table
+  renderFindXL();
 
   /* --- Contact Form Handler --- */
   const contactForm = document.getElementById('contactForm');
